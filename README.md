@@ -18,7 +18,7 @@ Alternatively, if you are using [`yarn`](https://yarnpkg.com/):
 yarn add graphiql-auth-token
 ```
 
-GraphiQLAuthToken  offers the same properties as [GraphiQL](https://github.com/graphql/graphiql/tree/master/packages/graphiql) as it is its subclass. It just requires one more (mandatory) `onTokenUpdate`: a callback function that will be called whenever the user enter / update the auth token. You can use it to store the token and include it inside the `fetcher`.
+GraphiQLAuthToken  offers the same properties as [GraphiQL](https://github.com/graphql/graphiql/tree/master/packages/graphiql) as it is its subclass. It just requires one more (mandatory) property: `onTokenUpdate` - a callback function that will be called whenever the user enter / update the auth token. You can use it to store the token and include it inside the `fetcher`.
 
 ```js
 import React from 'react';
