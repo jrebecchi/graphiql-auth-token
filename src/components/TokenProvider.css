@@ -1,0 +1,41 @@
+.form-control {
+    display: inline-block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    height: 13px;
+    width: 500px;
+    margin-left: 20px;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+}
+
+.token-title {
+    color: rgb(253, 253, 253);
+    font-family: system, -apple-system, 'San Francisco', '.SFNSDisplay-Regular', 'Segoe UI', Segoe, 'Segoe WP', 'Helvetica Neue', helvetica, 'Lucida Grande', arial, sans-serif;
+    font-size: 16px;
+    line-height: 18px;
+}
+
+.token-container {
+    height: 25px;
+    background-color: rgb(104, 104, 104);
+    text-align: left;
+    vertical-align: text-top;
+    padding: 6px 14px 7px 14px;
+    min-width: 1000px;
+}

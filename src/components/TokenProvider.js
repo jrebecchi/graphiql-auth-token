@@ -7,61 +7,46 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import './TokenProvider.css'
 
 /**
  * TokenProvider
  *
  * What a nice round shiny toggle button and a little input text to insert a bearer token inside your GraphQL Request.
  */
-export class TokenProvider extends React.Component {
-  static propTypes = {
-    addToken: PropTypes.bool,
-    onTokenUpdate: PropTypes.func.isRequired
-  };
-
-  constructor(props) {
-    super(props);
-    this.state={
-      addToken: Boolean(props.addToken),
-      token: null
+export default class TokenProvider extends React.Component {
+    static propTypes = {
+        onTokenUpdate: PropTypes.func.isRequired
     };
-  }
 
-  render() {
-    const buttonStyle = {};
-    let tokenInput;
-    const buttonTitle = 'Include auth token';
-    if (this.state.addToken){
+    constructor(props) {
+        super(props);
+        this.state = {
+            token: ''
+        };
+    }
+
+    render() {
+        const buttonStyle = {};
+        let tokenInput;
+        const title = 'Include authentication token';
         buttonStyle.background = 'linear-gradient(rgb(33, 150, 243), rgb(0, 122, 220))';
         buttonStyle.color = 'white';
-        tokenInput = <input type="text" name="token" placeholder="Token" className="form-control" onChange={this.handleChange} value={this.state.token}/>
+        tokenInput = <input type="text" name="token" placeholder="Token" className="form-control" onChange={this.handleChange} value={this.state.token} />
+        return (
+            <div className="token-container">
+                <span className="token-title">{title}</span>
+                {tokenInput}
+            </div>
+        );
     }
-    return (
-      <div className="toolbar">
-        <button className={'toolbar-button'} style={buttonStyle} onClick={this.handleClick}>{buttonTitle}</button>
-        {tokenInput}
-      </div>
-    );
-  }
 
-  handleClick = () => {
-    if(this.state.addToken){
-      this.props.onTokenUpdate(null);
-    } else {
-      this.props.onTokenUpdate(this.state.token);
-    }
-    this.setState({
-      ...this.state,
-      addToken: !this.state.addToken
-    });
-  };
-
-  handleChange = (e) => {
-    const token = (e.target.value === '') ? null : e.target.value;
-    this.setState({
-      ...this.state,
-      token
-    });
-    this.props.onTokenUpdate(token);
-  };
+    handleChange = (e) => {
+        const token = e.target.value;
+        this.setState({
+            ...this.state,
+            token
+        });
+        this.props.onTokenUpdate(token);
+    };
 }
