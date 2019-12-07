@@ -4,9 +4,11 @@
 
 A React subclass of [GraphiQL](https://github.com/graphql/graphiql/tree/master/packages/graphiql) allowing you to add an authentication token from the user interface.
 
-[![](https://raw.githubusercontent.com/JohannC/img/master/GraphiQL-with-token.png)]()
+<p align="center">
+  <img src="https://raw.githubusercontent.com/JohannC/img/master/GraphiQL-with-token.png" alt="GraphiQL Auth Token - Screenshot"/>
+</p>
 
-### Getting started
+## Getting started
 
 ```
 npm install --save graphiql-auth-token
@@ -18,7 +20,7 @@ Alternatively, if you are using [`yarn`](https://yarnpkg.com/):
 yarn add graphiql-auth-token
 ```
 
-GraphiQLAuthToken  offers the same properties as [GraphiQL](https://github.com/graphql/graphiql/tree/master/packages/graphiql) as it is its subclass. It just requires one more (mandatory) property: `onTokenUpdate` - a callback function that will be called whenever the user enter / update the auth token. You can use it to store the token and include it inside the `fetcher`.
+GraphiQLAuthToken  offers the same properties as [GraphiQL](https://github.com/graphql/graphiql/tree/master/packages/graphiql) as it is its subclass. It just requires one more (mandatory) `onTokenUpdate`: a callback function that will be called whenever the user enter / update the auth token. You can use it to store the token and include it inside the `fetcher`.
 
 ```js
 import React from 'react';
@@ -31,7 +33,7 @@ let token =  null,
 const graphQLFetcher = (graphQLParams) => {
     const headers = { 'Content-Type': 'application/json' }
     if (token){
-        headers['Authentication'] = 'Bearer ' + token;
+        headers['Authorization'] = 'Bearer ' + token;
     }
     return fetch(window.location.origin + '/graphql', {
         method: 'post',
@@ -46,3 +48,7 @@ ReactDOM.render(<GraphiQLAuthToken fetcher={graphQLFetcher} onTokenUpdate={onTok
 ```
 
 To know the rest of the properties available, please refer to [GraphiQL](https://github.com/graphql/graphiql/tree/master/packages/graphiql) documentation.
+
+## Usage with express-graphql
+
+To use GraphiQL-Auth-Token inside express-graphql instead of the regular GraphiQL please refer to this [example](https://github.com/JohannC/graphiql-auth-token/tree/master/examples/ExampleWithExpressGraphQL.js).

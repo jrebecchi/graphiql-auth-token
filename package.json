@@ -1,67 +1,67 @@
 {
-  "name": "graphiql-auth-token",
-  "version": "1.0.0",
-  "description": "A React subclass of GraphiQL allowing you to add an authentication token from the user interface.",
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "files": [
-    "css",
-    "es",
-    "lib",
-    "umd"
-  ],
-  "scripts": {
-    "build": "nwb build-react-component",
-    "clean": "nwb clean-module && nwb clean-demo",
-    "prepublishOnly": "npm run build",
-    "start": "\"concurrently \"babel-node demo\\src\\server.js\" \"nwb serve-react-demo\""
-  },
-  "dependencies": {
-    "graphiql": "^0.17.0"
-  },
-  "peerDependencies": {
-    "react": "16.x"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.7.4",
-    "@babel/node": "^7.7.4",
-    "@babel/plugin-proposal-class-properties": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
-    "@babel/preset-flow": "^7.7.4",
-    "@babel/preset-react": "^7.7.4",
-    "babelify": "^10.0.0",
-    "browserify": "^16.5.0",
-    "browserify-shim": "^3.8.14",
-    "concurrently": "^5.0.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "express-graphql": "^0.9.0",
-    "graphql": "^14.5.8",
-    "nwb": "0.23.x",
-    "prop-types": "^15.7.2",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "regenerator-runtime": "^0.13.3",
-    "watchify": "^3.11.1"
-  },
-  "bugs": {
-    "url": "https://github.com/JohannC/graphiql-auth-token/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/JohannC/graphiql-auth-token.git"
-  },
-  "author": "JohannC",
-  "homepage": "https://github.com/JohannC",
-  "license": "MIT",
-  "keywords": [
-    "react-component",
-    "graphql",
-    "graphiql",
-    "authentication",
-    "token",
-    "bearer",
-    "basic",
-    "auth"
-  ]
+    "name": "graphiql-auth-token",
+    "version": "1.0.1",
+    "description": "A React subclass of GraphiQL allowing you to add an authentication token from the user interface.",
+    "main": "lib/index.js",
+    "module": "es/index.js",
+    "files": [
+        "css",
+        "es",
+        "lib",
+        "umd"
+    ],
+    "scripts": {
+        "build": "nwb build-react-component",
+        "clean": "nwb clean-module && nwb clean-demo",
+        "prepublishOnly": "npm run build",
+        "start": "\"concurrently \"babel-node demo\\src\\server.js\" \"nwb serve-react-demo\""
+    },
+    "dependencies": {
+        "graphiql": "^0.17.0"
+    },
+    "peerDependencies": {
+        "react": "16.x"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.7.4",
+        "@babel/node": "^7.7.4",
+        "@babel/plugin-proposal-class-properties": "^7.7.4",
+        "@babel/preset-env": "^7.7.4",
+        "@babel/preset-flow": "^7.7.4",
+        "@babel/preset-react": "^7.7.4",
+        "babelify": "^10.0.0",
+        "browserify": "^16.5.0",
+        "browserify-shim": "^3.8.14",
+        "concurrently": "^5.0.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "express-graphql": "^0.9.0",
+        "graphql": "^14.5.8",
+        "nwb": "0.23.x",
+        "prop-types": "^15.7.2",
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0",
+        "regenerator-runtime": "^0.13.3",
+        "watchify": "^3.11.1"
+    },
+    "bugs": {
+        "url": "https://github.com/JohannC/graphiql-auth-token/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/JohannC/graphiql-auth-token.git"
+    },
+    "author": "JohannC",
+    "homepage": "https://github.com/JohannC",
+    "license": "MIT",
+    "keywords": [
+        "react-component",
+        "graphql",
+        "graphiql",
+        "authentication",
+        "token",
+        "bearer",
+        "basic",
+        "auth"
+    ]
 }

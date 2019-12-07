@@ -37,19 +37,7 @@ export default class GraphiQLAuthToken extends GraphiQL {
 
     constructor(props) {
         super(props);
-        // const fetcher = (params) => {
-        //     console.log("yo");
-        //     // return this.getFetchParams(params)
-        //     // .then((paramsWithToken) => props.fetcher(paramsWithToken))
-        // };
-        // const newProps = { fetcher }
-        // super(newProps);
     }
-
-    // getFetchParams = (params) => new Promise((resolve, reject) => {
-    //     const token = this.state.token
-    //     resolve({ ...params, token })
-    // });
 
     onTokenUpdate = (newToken) => {
         this.props.onTokenUpdate(newToken)
