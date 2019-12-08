@@ -17,8 +17,8 @@ A React subclass of [GraphiQL](https://github.com/graphql/graphiql/tree/master/p
 
 # First
 mutation{
-  register(fields:{username:"yourname", email: "your@mail.com", password:"yourpassword"}){
-  	notifications{
+  register(fields:{username:"yourname", email: "your@mail.com" password:"yourpassword"}){
+    notifications{
       type
     }
   }
@@ -27,7 +27,7 @@ mutation{
 # Second
 mutation{
   login(fields:{login: "your@mail.com", password:"yourpassword"}){
-  	token
+    token
   }
 }
 
