@@ -99,7 +99,7 @@ function renderGraphiQLAuthToken(data) {
         if (token){
           headers['Authorization'] = 'Bearer ' + token;
         }
-        return fetch(window.location.origin + '/graphql', {
+        return fetch(fetchURL, {
           method: 'post',
           headers,
           body: JSON.stringify(graphQLParams),
