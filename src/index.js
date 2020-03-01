@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { GraphQLSchema } from 'graphql';
 import '../node_modules/graphiql/graphiql.css';
 import TokenProvider from './components/TokenProvider';
+import ToastContainer from './components/ToastContainer';
 
 export default class GraphiQLAuthToken extends GraphiQL {
     static propTypes = {
@@ -33,6 +34,7 @@ export default class GraphiQLAuthToken extends GraphiQL {
         readOnly: PropTypes.bool,
         docExplorerOpen: PropTypes.bool,
         token: PropTypes.string,
+        notifications: PropTypes.array
     };
 
     constructor(props) {
@@ -55,6 +57,7 @@ export default class GraphiQLAuthToken extends GraphiQL {
         return (
             <div style={style}>
                 <TokenProvider onTokenUpdate={this.onTokenUpdate} />
+                <ToastContainer notifications={this.props.notifications} />
                 {super.render()}
             </div>
         )

@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import { render } from 'react-dom'
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import socketIOClient from "socket.io-client";
 
 import GraphiQLAuthToken from '../../src'
 
@@ -7,17 +8,40 @@ class Demo extends Component {
     constructor() {
         super();
         this.token = null;
+        this.state = {
+            notifications: []
+        }
     }
 
     onTokenUpdate = (token) => {
         this.token = token;
     }
 
+    componentDidMount() {
+        this.socket = socketIOClient("http://localhost:43500");
+        this.socket.on("FromAPI", data => {
+            console.log(data);
+            if (Array.isArray(data)){
+                this.setState({ notifications: data })
+            }
+        });
+    }
+
+    componentWillUnmount(){
+        this.socket.close();
+    }
+
+    componentDidUpdate() {
+        if (this.state.notifications.length > 0){
+            this.setState({ notifications: []})
+        }
+    }
+
     render() {
 
         const graphQLFetcher = (graphQLParams) => {
             const headers = { 'Content-Type': 'application/json' }
-            if (this.token){
+            if (this.token) {
                 headers['Authentication'] = 'Bearer ' + this.token;
             }
             return fetch('http://localhost:43500/graphql', {
@@ -25,10 +49,6 @@ class Demo extends Component {
                 headers,
                 body: JSON.stringify(graphQLParams),
             }).then(response => response.json());
-        }
-
-        const onTokenUpdate = (token) => {
-            this.token = token;
         }
 
         const style = {
@@ -41,7 +61,7 @@ class Demo extends Component {
 
         return (
             <div style={style}>
-                <GraphiQLAuthToken fetcher={graphQLFetcher} onTokenUpdate={this.onTokenUpdate} />
+                <GraphiQLAuthToken fetcher={graphQLFetcher} onTokenUpdate={this.onTokenUpdate} notifications={this.state.notifications} />
             </div>
         )
     }

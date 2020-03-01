@@ -17,7 +17,8 @@
         "start": "\"concurrently \"babel-node demo\\src\\server.js\" \"nwb serve-react-demo\""
     },
     "dependencies": {
-        "graphiql": "^0.17.0"
+        "graphiql": "^0.17.0",
+        "react-timeago": "^4.4.0"
     },
     "peerDependencies": {
         "react": "16.x"
@@ -42,7 +43,9 @@
         "react": "^16.12.0",
         "react-dom": "^16.12.0",
         "regenerator-runtime": "^0.13.3",
-        "watchify": "^3.11.1"
+        "socket.io": "^2.3.0",
+        "watchify": "^3.11.1",
+        "socket.io-client": "^2.3.0"
     },
     "bugs": {
         "url": "https://github.com/JohannC/graphiql-auth-token/issues"

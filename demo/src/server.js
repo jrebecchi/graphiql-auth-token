@@ -10,13 +10,14 @@ import graphqlHTTP from 'express-graphql';
 import fs from 'fs';
 import schema from './schema';
 import cors from 'cors';
+const socketIo = require("socket.io");
 
 const app = express();
 // Server
 app.use(cors());
 app.use('/graphql', graphqlHTTP({ schema }));
 
-app.listen(43500, function () {
+const server = app.listen(43500, function () {
     const port = this.address().port;
     console.log('PID', process.pid)
     fs.writeFile(path.join(__dirname, 'pid'), parseInt(process.pid, 10), () => {
@@ -28,4 +29,31 @@ app.listen(43500, function () {
     process.once('SIGTERM', () => {
         process.exit()
     })
+});
+
+const io = socketIo(server);
+let interval;
+let i = 0
+const types = ["", "secondary", "success", "info", "warning", "danger"];
+const getApiAndEmit = async socket => {
+    try {
+        socket.emit("FromAPI", [{ 
+            message: "A little message for you.", 
+            title: "Message number " + (++i), 
+            type: types[(Math.floor(Math.random() * types.length))] 
+        }]);
+    } catch (error) {
+        console.error(`Error: ${error.code}`);
+    }
+}
+
+io.on("connection", socket => {
+    console.log("New client connected");
+    if (interval) {
+        clearInterval(interval);
+    }
+    interval = setInterval(() => getApiAndEmit(socket), 5000);
+    socket.on("disconnect", () => {
+        console.log("Client disconnected");
+    });
 });
