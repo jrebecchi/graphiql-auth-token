@@ -1,7 +1,7 @@
 {
     "name": "graphiql-auth-token",
-    "version": "1.0.2",
-    "description": "A React subclass of GraphiQL allowing you to add an authentication token from the user interface.",
+    "version": "1.1.0",
+    "description": "A React subclass of GraphiQL allowing you to add an authentication token from the user interface and notifications from the server.",
     "main": "lib/index.js",
     "module": "es/index.js",
     "files": [
@@ -65,6 +65,9 @@
         "token",
         "bearer",
         "basic",
-        "auth"
+        "auth",
+        "notification", 
+        "server",
+        "notifications"
     ]
 }
