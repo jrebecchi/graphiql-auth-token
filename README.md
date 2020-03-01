@@ -5,7 +5,7 @@
 A React subclass of [GraphiQL](https://github.com/graphql/graphiql/tree/master/packages/graphiql) allowing you to add an authentication token from the user interface and to pop up notifications from the server.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/JohannC/img/master/GraphiQL-with-token.png" alt="GraphiQL Auth Token - Screenshot"/>
+  <img src="https://raw.githubusercontent.com/JohannC/img/master/GraphiQL-with-token-and-notif.png" alt="GraphiQL Auth Token - Screenshot"/>
 </p>
 
 ## Demo
