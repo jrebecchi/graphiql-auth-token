@@ -89,12 +89,21 @@ To know the rest of the properties available, please refer to [GraphiQL](https:/
 ## Sending pop-up notifications
 
 You can display notifications from the server by using for instance [socket.io](https://github.com/socketio/socket.io). You just have to pass an array in the `notifications` property containing objects with the following attributes:
-* title - mandatory `String` property - The notification title
-* message - mandatory `String` property - The notification message
-* type - `String` property - The notification color, possible values: `undefined` | `"secondary"` | `"success"` | `"info"` | `"warning"` | `"danger"`
-* date - `Date` property - The notification date
 
-Find a complete example [here](https://github.com/JohannC/graphiql-auth-token/tree/master/demo/src/index.js).
+```js
+const notifications = [
+    {
+        title: "Notification title", // Mandatory
+        message: "Notificaiton message", // Mandatory
+        type: "info", // Possible values undefined | "secondary" | "success" | "info" | "warning" | "danger"
+        date: new Date() // If not specified, it will be automatically set
+    },
+    // ...
+]
+
+```
+
+Find a minimal example below or look at complete one with the client [here](https://github.com/JohannC/graphiql-auth-token/tree/master/demo/src/index.js) and the server [here](https://github.com/jrebecchi/graphiql-auth-token/blob/master/demo/src/server.js).
 
 ```js
 import React, { Component } from 'react';
@@ -119,7 +128,7 @@ class Demo extends Component {
 
     componentDidUpdate() {
         if (this.state.notifications.length > 0){
-            this.setState({ notifications: []})
+            this.setState({ notifications: [] })
         }
     }
 

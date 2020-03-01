@@ -35,12 +35,13 @@ const io = socketIo(server);
 let interval;
 let i = 0
 const types = ["", "secondary", "success", "info", "warning", "danger"];
+const randomType = () => types[(Math.floor(Math.random() * types.length))];
 const getApiAndEmit = async socket => {
     try {
         socket.emit("notification", [{
             message: "A little message for you.",
             title: "Message number " + (++i),
-            type: types[(Math.floor(Math.random() * types.length))]
+            type: randomType()
         }]);
     } catch (error) {
         console.error(`Error: ${error.code}`);

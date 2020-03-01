@@ -21,6 +21,7 @@ class Demo extends Component {
         this.socket = socketIOClient("http://localhost:43500");
         this.socket.on("notification", data => {
             if (Array.isArray(data)) {
+                console.log(data);
                 this.setState({ notifications: data })
             }
         });
