@@ -19,21 +19,20 @@ class Demo extends Component {
 
     componentDidMount() {
         this.socket = socketIOClient("http://localhost:43500");
-        this.socket.on("FromAPI", data => {
-            console.log(data);
-            if (Array.isArray(data)){
+        this.socket.on("notification", data => {
+            if (Array.isArray(data)) {
                 this.setState({ notifications: data })
             }
         });
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.socket.close();
     }
 
     componentDidUpdate() {
-        if (this.state.notifications.length > 0){
-            this.setState({ notifications: []})
+        if (this.state.notifications.length > 0) {
+            this.setState({ notifications: [] })
         }
     }
 

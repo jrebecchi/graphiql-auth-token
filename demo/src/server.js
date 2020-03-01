@@ -37,10 +37,10 @@ let i = 0
 const types = ["", "secondary", "success", "info", "warning", "danger"];
 const getApiAndEmit = async socket => {
     try {
-        socket.emit("FromAPI", [{ 
-            message: "A little message for you.", 
-            title: "Message number " + (++i), 
-            type: types[(Math.floor(Math.random() * types.length))] 
+        socket.emit("notification", [{
+            message: "A little message for you.",
+            title: "Message number " + (++i),
+            type: types[(Math.floor(Math.random() * types.length))]
         }]);
     } catch (error) {
         console.error(`Error: ${error.code}`);

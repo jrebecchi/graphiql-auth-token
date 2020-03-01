@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/npm/l/graphiql.svg?style=flat-square)](LICENSE)
 
-A React subclass of [GraphiQL](https://github.com/graphql/graphiql/tree/master/packages/graphiql) allowing you to add an authentication token from the user interface.
+A React subclass of [GraphiQL](https://github.com/graphql/graphiql/tree/master/packages/graphiql) allowing you to add an authentication token from the user interface and to pop up notifications from the server.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/JohannC/img/master/GraphiQL-with-token.png" alt="GraphiQL Auth Token - Screenshot"/>
@@ -39,7 +39,7 @@ query{
 }
 ```
 
-## Getting started
+## Adding an authentication token
 
 ```
 npm install --save graphiql-auth-token
@@ -51,7 +51,7 @@ Alternatively, if you are using [`yarn`](https://yarnpkg.com/):
 yarn add graphiql-auth-token
 ```
 
-GraphiQLAuthToken  offers the same properties as [GraphiQL](https://github.com/graphql/graphiql/tree/master/packages/graphiql) as it is its subclass. It just requires one more mandatory property, `onTokenUpdate`: a callback function that will be called whenever the user enter / update the auth token. You can use it to store the token and include it inside the `fetcher`.
+GraphiQLAuthToken offers the same properties as [GraphiQL](https://github.com/graphql/graphiql/tree/master/packages/graphiql) as it is its subclass. It just requires one more mandatory property, `onTokenUpdate`: a callback function that will be called whenever the user enter / update the auth token. You can use it to store the token and include it inside the `fetcher`.
 
 ```js
 import React from 'react';
@@ -59,26 +59,83 @@ import ReactDOM from 'react-dom';
 import GraphiQL from 'graphiql-auth-token';
 import fetch from 'isomorphic-fetch';
 
-let token =  null,
+let token =  null;
 
 const graphQLFetcher = (graphQLParams) => {
     const headers = { 'Content-Type': 'application/json' }
     if (token){
         headers['Authorization'] = 'Bearer ' + token;
     }
-    return fetch(window.location.origin + '/graphql', {
+    return fetch(window.location.origin + '/graphql', { //Server address to adapt
         method: 'post',
         headers,
         body: JSON.stringify(graphQLParams),
     }).then(response => response.json());
-}
 
 const onTokenUpdate = (newToken) => token = newToken;
 
-ReactDOM.render(<GraphiQLAuthToken fetcher={graphQLFetcher} onTokenUpdate={onTokenUpdate}/>, document.body);
+const style = { position: 'fixed', height: '100%', width: '100%', left: '0px',top: '0px' }
+
+ReactDOM.render(
+    <div style={style}>
+        <GraphiQLAuthToken fetcher={graphQLFetcher} onTokenUpdate={onTokenUpdate} />
+    </div>, 
+    document.body
+);
 ```
 
 To know the rest of the properties available, please refer to [GraphiQL](https://github.com/graphql/graphiql/tree/master/packages/graphiql) documentation.
+
+## Sending pop-up notifications
+
+You can display notifications from the server by using for instance [socket.io](https://github.com/socketio/socket.io). You just have to pass an array in the `notifications` property containing objects with the following attributes:
+* title - mandatory `String` property - The notification title
+* message - mandatory `String` property - The notification message
+* type - `String` property - The notification color, possible values: `undefined` | `"secondary"` | `"success"` | `"info"` | `"warning"` | `"danger"`
+* date - `Date` property - The notification date
+
+Find a complete example [here](https://github.com/JohannC/graphiql-auth-token/tree/master/demo/src/index.js).
+
+```js
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import socketIOClient from "socket.io-client";
+import GraphiQLAuthToken from 'graphiql-auth-token';
+
+class Demo extends Component {
+    constructor() {
+        super();
+        this.state = { notifications: [] }
+    }
+
+    componentDidMount() {
+        this.socket = socketIOClient("http://localhost:43500"); //Server addess to adapt
+        this.socket.on("notification", data => {
+            if (Array.isArray(data)){
+                this.setState({ notifications: data })
+            }
+        });
+    }
+
+    componentDidUpdate() {
+        if (this.state.notifications.length > 0){
+            this.setState({ notifications: []})
+        }
+    }
+
+    render() {
+        const style = { position: 'fixed', height: '100%', width: '100%', left: '0px',top: '0px' }
+        return (
+            <div style={style}>
+                <GraphiQLAuthToken fetcher={graphQLFetcher} notifications={this.state.notifications} />
+            </div>
+        )
+    }
+}
+
+ReactDOM.render((<Demo />, document.body);
+
+```
 
 ## Usage with express-graphql
 
