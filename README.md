@@ -99,6 +99,7 @@ const notification = {
         date: new Date() // If not specified, it will be automatically set
 }
 ```
+The `title` and `message` can contain HTML tags.
 
 Find a minimal example below or look at complete one with the client [here](https://github.com/JohannC/graphiql-auth-token/tree/master/demo/src/index.js) and the server [here](https://github.com/jrebecchi/graphiql-auth-token/blob/master/demo/src/server.js).
 
