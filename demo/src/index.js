@@ -9,7 +9,7 @@ class Demo extends Component {
         super();
         this.token = null;
         this.state = {
-            notifications: []
+            notification: null
         }
     }
 
@@ -20,20 +20,12 @@ class Demo extends Component {
     componentDidMount() {
         this.socket = socketIOClient("http://localhost:43500");
         this.socket.on("notification", data => {
-            if (Array.isArray(data)) {
-                this.setState({ notifications: data })
-            }
+            this.setState({ notification: data })
         });
     }
 
     componentWillUnmount() {
         this.socket.close();
-    }
-
-    componentDidUpdate() {
-        if (this.state.notifications.length > 0) {
-            this.setState({ notifications: [] })
-        }
     }
 
     render() {
@@ -60,7 +52,7 @@ class Demo extends Component {
 
         return (
             <div style={style}>
-                <GraphiQLAuthToken fetcher={graphQLFetcher} onTokenUpdate={this.onTokenUpdate} notifications={this.state.notifications} />
+                <GraphiQLAuthToken fetcher={graphQLFetcher} onTokenUpdate={this.onTokenUpdate} notification={this.state.notification} />
             </div>
         )
     }

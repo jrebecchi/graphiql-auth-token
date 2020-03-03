@@ -34,7 +34,7 @@ export default class GraphiQLAuthToken extends GraphiQL {
         readOnly: PropTypes.bool,
         docExplorerOpen: PropTypes.bool,
         token: PropTypes.string,
-        notifications: PropTypes.array
+        notification: PropTypes.object
     };
 
     constructor(props) {
@@ -57,7 +57,7 @@ export default class GraphiQLAuthToken extends GraphiQL {
         return (
             <div style={style}>
                 <TokenProvider onTokenUpdate={this.onTokenUpdate} />
-                <ToastContainer notifications={this.props.notifications} />
+                <ToastContainer notification={this.props.notification} />
                 {super.render()}
             </div>
         )

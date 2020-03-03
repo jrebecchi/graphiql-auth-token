@@ -39,8 +39,7 @@ query{
 }
 ```
 
-## Adding an authentication token
-
+## Installation
 ```
 npm install --save graphiql-auth-token
 ```
@@ -50,6 +49,8 @@ Alternatively, if you are using [`yarn`](https://yarnpkg.com/):
 ```
 yarn add graphiql-auth-token
 ```
+
+## Adding an authentication token
 
 GraphiQLAuthToken offers the same properties as [GraphiQL](https://github.com/graphql/graphiql/tree/master/packages/graphiql) as it is its subclass. It just requires one more mandatory property, `onTokenUpdate`: a callback function that will be called whenever the user enter / update the auth token. You can use it to store the token and include it inside the `fetcher`.
 
@@ -88,19 +89,15 @@ To know the rest of the properties available, please refer to [GraphiQL](https:/
 
 ## Sending pop-up notifications
 
-You can display notifications from the server by using for instance [socket.io](https://github.com/socketio/socket.io). You just have to pass an array in the `notifications` property containing objects with the following attributes:
+You can display notifications from the server by using for instance [socket.io](https://github.com/socketio/socket.io). You just have to pass each notification into the `notification` property of the component. It can contain the following attributes:
 
 ```js
-const notifications = [
-    {
+const notification = {
         title: "Notification title", // Mandatory
         message: "Notificaiton message", // Mandatory
         type: "info", // Possible values undefined | "secondary" | "success" | "info" | "warning" | "danger"
         date: new Date() // If not specified, it will be automatically set
-    },
-    // ...
-]
-
+}
 ```
 
 Find a minimal example below or look at complete one with the client [here](https://github.com/JohannC/graphiql-auth-token/tree/master/demo/src/index.js) and the server [here](https://github.com/jrebecchi/graphiql-auth-token/blob/master/demo/src/server.js).
@@ -114,29 +111,27 @@ import GraphiQLAuthToken from 'graphiql-auth-token';
 class Demo extends Component {
     constructor() {
         super();
-        this.state = { notifications: [] }
+        this.state = { notification: null }
     }
 
     componentDidMount() {
         this.socket = socketIOClient("http://localhost:43500"); //Server addess to adapt
         this.socket.on("notification", data => {
-            if (Array.isArray(data)){
-                this.setState({ notifications: data })
-            }
+            this.setState({ notification: data })
         });
     }
 
-    componentDidUpdate() {
-        if (this.state.notifications.length > 0){
-            this.setState({ notifications: [] })
-        }
+    componentWillUnmount() {
+        this.socket.close();
     }
 
     render() {
+        const graphQLFetcher = (graphQLParams) => ...; // To complete
         const style = { position: 'fixed', height: '100%', width: '100%', left: '0px',top: '0px' }
+
         return (
             <div style={style}>
-                <GraphiQLAuthToken fetcher={graphQLFetcher} notifications={this.state.notifications} />
+                <GraphiQLAuthToken fetcher={graphQLFetcher} notification={this.state.notification} />
             </div>
         )
     }

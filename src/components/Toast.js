@@ -21,7 +21,8 @@ export default class Toast extends React.Component {
         title: PropTypes.string,
         date: PropTypes.instanceOf(Date),
         type: PropTypes.string, // secondary | success | info | warning | danger
-        remove: PropTypes.func
+        remove: PropTypes.func,
+        listEl: PropTypes.object,
     };
 
     constructor(props) {
@@ -41,7 +42,7 @@ export default class Toast extends React.Component {
         this.setState({ ...this.state, hide: true });
         setTimeout(() => {
             this.setState({ ...this.state, hide: false });
-            this.props.remove()
+            this.props.remove(this.props.listEl)
         }, 550);
     }
 
