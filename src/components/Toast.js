@@ -56,15 +56,13 @@ export default class Toast extends React.Component {
         return (
             <div className="toast --blue" style={hidedStyle} role="alert" aria-live="assertive" aria-atomic="true" >
                 <div className={"toast-header " + this.props.type}>
-                    <strong className="mr-auto">{this.props.title}</strong>
+                    <strong className="mr-auto" dangerouslySetInnerHTML={{ __html: this.props.title }} />
                     <small><TimeAgo date={this.state.date} /></small>
                     <button type="button" className="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick={this.handleClick}>
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div className="toast-body">
-                    {this.props.message}
-                </div>
+                <div className="toast-body" dangerouslySetInnerHTML={{ __html: this.props.message }} />
             </div>
         );
     }

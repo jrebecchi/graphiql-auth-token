@@ -39,8 +39,8 @@ const randomType = () => types[(Math.floor(Math.random() * types.length))];
 const getApiAndEmit = async socket => {
     try {
         socket.emit("notification", {
-            message: "A little message for you.",
-            title: "Message number " + (++i),
+            message: 'A little message for you: <a href="/" target="_blank"/>click here</a>',
+            title: 'Message number ' + (++i),
             type: randomType()
         });
     } catch (error) {
