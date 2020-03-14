@@ -46,7 +46,6 @@ export default class GraphiQLAuthToken extends GraphiQL {
     }
 
     render() {
-
         return (
             <div>
                 <TokenProvider onTokenUpdate={this.onTokenUpdate} />
