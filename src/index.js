@@ -46,16 +46,8 @@ export default class GraphiQLAuthToken extends GraphiQL {
     }
 
     render() {
-        const style = {
-            position: 'fixed',
-            height: '100%',
-            width: '100%',
-            left: '0px',
-            top: '0px',
-        }
-
         return (
-            <div style={style}>
+            <div>
                 <TokenProvider onTokenUpdate={this.onTokenUpdate} />
                 <ToastContainer notification={this.props.notification} />
                 {super.render()}

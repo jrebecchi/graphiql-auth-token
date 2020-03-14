@@ -13,7 +13,6 @@
     border-radius: .25rem;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     height: 13px;
-    width: 500px;
     margin-left: 20px;
 }
 
@@ -37,5 +36,4 @@
     text-align: left;
     vertical-align: text-top;
     padding: 6px 14px 7px 14px;
-    min-width: 1000px;
 }
