@@ -8,7 +8,7 @@ import ToastContainer from './components/ToastContainer';
 
 export default class GraphiQLAuthToken extends GraphiQL {
     static propTypes = {
-        onTokenUpdate: PropTypes.func.isRequired,
+        onTokenUpdate: PropTypes.func,
         fetcher: PropTypes.func.isRequired,
         schema: PropTypes.instanceOf(GraphQLSchema),
         query: PropTypes.string,
@@ -42,13 +42,16 @@ export default class GraphiQLAuthToken extends GraphiQL {
     }
 
     onTokenUpdate = (newToken) => {
-        this.props.onTokenUpdate(newToken)
+        if (this.props.onTokenUpdate){
+            this.props.onTokenUpdate(newToken)
+        }
     }
 
     render() {
+        const tokenProvider = (this.props.onTokenUpdate) ? <TokenProvider onTokenUpdate={this.onTokenUpdate} /> : null;
         return (
             <div>
-                <TokenProvider onTokenUpdate={this.onTokenUpdate} />
+                {tokenProvider}
                 <ToastContainer notification={this.props.notification} />
                 {super.render()}
             </div>

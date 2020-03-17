@@ -28,15 +28,23 @@ export default class TokenProvider extends React.Component {
 
     render() {
         const buttonStyle = {};
-        let tokenInput;
-        const title = 'Include authentication token';
+        const title = 'Authentication token';
+        const abbreviation = 'This includes the token within the request headers to make authenticated requests.'
         buttonStyle.background = 'linear-gradient(rgb(33, 150, 243), rgb(0, 122, 220))';
         buttonStyle.color = 'white';
-        tokenInput = <input type="text" name="token" placeholder="Token" className="form-control" onChange={this.handleChange} value={this.state.token} />
         return (
             <div className="token-container">
-                <span className="token-title">{title}</span>
-                {tokenInput}
+                <span className="token-title">
+                    <abbr title={abbreviation}>{title}</abbr>
+                </span>
+                <input 
+                    type="text" 
+                    name="token" 
+                    placeholder="Token" 
+                    className="form-control" 
+                    onChange={this.handleChange} 
+                    value={this.state.token}         
+                />
             </div>
         );
     }

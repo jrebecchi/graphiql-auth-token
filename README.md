@@ -10,7 +10,7 @@ A React subclass of [GraphiQL](https://github.com/graphql/graphiql/tree/master/p
 
 ## Demo
 
-[Try the live demo](https://graphql-auth-service.herokuapp.com/graphql). It is implemented in this other package: [GraphQL Auth Service](https://github.com/JohannC/GraphQL-Auth-Service), a customizable authentication service working with express-graphql.
+[Try the live demo](https://nusid.net/graphql-auth-service/). It is implemented in this other package: [GraphQL Auth Service](https://github.com/JohannC/GraphQL-Auth-Service), a customizable authentication service working with express-graphql.
 
 ```python
 # Enter the following queries replacing the username, email and password #
@@ -52,7 +52,7 @@ yarn add graphiql-auth-token
 
 ## Adding an authentication token
 
-GraphiQLAuthToken offers the same properties as [GraphiQL](https://github.com/graphql/graphiql/tree/master/packages/graphiql) as it is its subclass. It just requires one more mandatory property, `onTokenUpdate`: a callback function that will be called whenever the user enter / update the auth token. You can use it to store the token and include it inside the `fetcher`.
+GraphiQLAuthToken offers the same properties as [GraphiQL](https://github.com/graphql/graphiql/tree/master/packages/graphiql) as it is its subclass. It just requires one more property, `onTokenUpdate`: a callback function that will be called whenever the user enter / update the auth token. You can use it to store the token and include it inside the `fetcher`.
 
 ```js
 import React from 'react';
